@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZCameraShake;
+using ShakeCam;
 
-public abstract class BaseEnemy : MonoBehaviour, IDamageble
+public abstract class CatEnemy : MonoBehaviour, IDamageble
 {
-    [SerializeField] protected GameObject DeathEffect;
-    [SerializeField] protected float Health;
-    [SerializeField] protected Transform[] WayPoints;
-    [SerializeField] protected float Speed;
-    [SerializeField] protected float TimeToWait;
+    [SerializeField] protected GameObject _deathEffect;
+    [SerializeField] protected float _health;
+    [SerializeField] protected Transform[] _wayPoints;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected float _timeToWait;
 
-    protected float WaitCounter;
-    protected int PointIndex;
-    protected bool IsMooving = false;
+    protected float _waitCounter;
+    protected int _pointIndex;
+    protected bool _isMooving = false;
 
     public void Die()
     {
@@ -23,15 +23,15 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageble
 
     public void SpawnDeathEffect()
     {
-        GameObject effect = Instantiate(DeathEffect, transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(_deathEffect, transform.position, Quaternion.identity);
         CameraShaker.Instance.ShakeOnce(1.5f, 2, 1, 1);
         Destroy(effect, 3f);
     }
 
     public  void TakeDamage(float damage)
     {
-        Health -= damage;
-        if (Health <= 0)
+        _health -= damage;
+        if (_health <= 0)
         {
             Die();
         }
